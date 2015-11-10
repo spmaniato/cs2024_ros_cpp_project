@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(cpp_controller)
 
+set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -9,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   geometry_msgs
+  turtlesim
 )
 
 ## System dependencies are found with CMake's conventions
@@ -24,8 +27,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES cpp_controller
+  INCLUDE_DIRS include
+  LIBRARIES cpp_controller
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
@@ -42,22 +45,27 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+set(HEADERS
+  include/${PROJECT_NAME}/cpp_controller_node.h
+)
+
+set(SOURCES
+  src/cpp_controller_node.cpp
+)
+
 ## Declare a cpp library
-# add_library(cpp_controller
-#   src/${PROJECT_NAME}/cpp_controller.cpp
-# )
+add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 ## Declare a cpp executable
 add_executable(cpp_controller_node src/cpp_controller_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-add_dependencies(cpp_controller_node cpp_controller_generate_messages_cpp)
+add_dependencies(${PROJECT_NAME} cpp_controller_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(cpp_controller_node
-  ${catkin_LIBRARIES}
-)
+target_link_libraries(${PROJECT_NAME} PUBLIC ${catkin_LIBRARIES})
+target_link_libraries(cpp_controller_node ${PROJECT_NAME})
 
 #############
 ## Install ##
