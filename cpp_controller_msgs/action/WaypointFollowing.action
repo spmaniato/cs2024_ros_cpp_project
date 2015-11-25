@@ -1,0 +1,13 @@
+# Goal definition
+geometry_msgs/Pose2D[] waypoints
+
+---
+
+# Result definition
+# Not specified. Use actionlib's result.
+
+---
+
+# Feedback
+geometry_msgs/Pose2D current_pose
+int32[] next_waypoint
