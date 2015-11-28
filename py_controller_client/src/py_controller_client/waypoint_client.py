@@ -11,14 +11,12 @@ def waypoint_client(waypoints = []):
     # Create the client, passing the type of the action to the constructor.
     client = actionlib.SimpleActionClient("waypoint_following",
                                           WaypointFollowingAction)
+
     # Wait until the action server has started up.
     client.wait_for_server()
 
-    # Create a goal to be sent to the action server.
-    action_goal = WaypointFollowingGoal()
-
-    # Fill out the request part of the message.
-    action_goal.waypoints = waypoints
+    # Create and populate the goal to be sent to the action server.
+    action_goal = WaypointFollowingGoal(waypoints = waypoints)
 
     # Send the goal to the   action server.
     client.send_goal(action_goal)
@@ -26,6 +24,7 @@ def waypoint_client(waypoints = []):
     # Wait for the server to finish performing the action.
     client.wait_for_result()
 
+    # Return the action's state, not its result (since it doesn't have one).
     return client.get_state()
 
 if __name__ == '__main__':
@@ -42,6 +41,6 @@ if __name__ == '__main__':
     try:
         rospy.init_node("waypoint_client_py")
         result = waypoint_client(waypoints)
-        print "Result:", result, ("SUCCEEDED = 3")
+        print "Action result:", result, "(SUCCEEDED = 3)"
     except rospy.ROSInterruptException as e:
         print "Client interrupted before completion!", str(e)
