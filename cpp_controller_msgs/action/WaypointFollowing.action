@@ -10,4 +10,4 @@ geometry_msgs/Pose2D[] waypoints
 
 # Feedback
 geometry_msgs/Pose2D current_pose
-int32[] next_waypoint
+int32 next_waypoint
