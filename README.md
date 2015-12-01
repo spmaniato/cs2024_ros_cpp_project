@@ -19,8 +19,8 @@ where you get to write a server that interacts with other subsystems, specifical
 It comprises three ROS ([Robot Operating System)](http://wiki.ros.org/) packages:
 
 * The `cpp_controller` package is the meat of the project.
-It contains a simple action server, written in C++, for steering a robot 
-(the turtle in TurtleSim) between a series of 2D waypoints.
+It contains a simple action server, written in C++. 
+Upon request, it steers the robot (the turtle in TurtleSim) between a series of 2D waypoints.
 * The `cpp_controller_msgs` defines the `WaypointFollowing` action interface.
 * The `py_controller_client` is there to house a simple Python action client to the C++ server.
 The list of waypoints is defined by the client and sent to the server via the aforementioned action interface.
@@ -102,8 +102,43 @@ Then, you can send a request to the server by running the client (in a fourth te
 rosrun py_controller_client waypoint_client.py
 ```
 
+Here is some sample server output:
+```
+[ INFO] [1448995509.625577083]: Navigating to waypoint: (x = 1.000000, y = 1.000000)
+[ INFO] [1448995509.636682061]: Robot's pose: (x = 0.907952, y = 9.490376)
+[ INFO] [1448995509.658199932]: Calculated control inputs: (u = 5.635375, w = 2.065123)
+[ INFO] [1448995510.636689515]: Robot's pose: (x = 0.009242, y = 4.545070)
+[ INFO] [1448995510.658202057]: Calculated control inputs: (u = 3.525378, w = 0.281630)
+[ INFO] [1448995511.636694146]: Robot's pose: (x = 0.307181, y = 2.256353)
+[ INFO] [1448995511.658201677]: Calculated control inputs: (u = 1.336730, w = 0.130230)
+[ INFO] [1448995512.636698631]: Robot's pose: (x = 0.550110, y = 1.395591)
+[ INFO] [1448995512.658210281]: Calculated control inputs: (u = 0.514108, w = 0.097712)
+[ INFO] [1448995512.889579574]: /waypoint_following action succeeded!
+```
+
+And the corresponding client output:
+```
+x: 1.0
+y: 1.0
+Action result: 3 (SUCCEEDED = 3)
+```
+
 When you are done, `ctrl-c` all four terminals.
 
 ## Under the Hood
 
-...
+Given a waypoint `[x_d y_d]`, the action server determines the robot's linear, `u`, 
+and angular, `ω`, velocities using the feedback linearization scheme below, 
+where `ε` (epsilon) is a small positive constant parameter.
+
+![img](https://dl.dropboxusercontent.com/u/43993203/feedback_linearization.png)
+
+and `[x y θ]` is the pose (position and orientation) of the robot at any given time. 
+
+The action server publishes the linear and angular velocity to the `/turtle1/cmd_vel` topic.
+It listens for the robot's pose on the `/turtle1/pose` topic. See [`cpp_controller_server.cpp`](https://github.com/spmaniato/cs2024_ros_cpp_project/blob/master/cpp_controller/src/cpp_controller_server.cpp).
+
+Once the robot is close enough to the current waypoint, the server 
+switches to the next waypoint until the robot has visited them all.
+Once finished, the server reports success via the action interface.
+The server's node remains up and running, waiting for the next request.
