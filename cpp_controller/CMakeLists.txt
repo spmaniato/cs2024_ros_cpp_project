@@ -50,11 +50,10 @@ include_directories(
 )
 
 set(HEADERS
-  # include/${PROJECT_NAME}/cpp_controller_node.h
+  include/${PROJECT_NAME}/cpp_controller_server.h
 )
 
 set(SOURCES
-  # src/cpp_controller_node.cpp
   src/cpp_controller_server.cpp
 )
 
@@ -63,7 +62,6 @@ add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 ## Declare a cpp executable
 add_executable(
-  # cpp_controller_node src/cpp_controller_node.cpp
   cpp_controller_server src/cpp_controller_server.cpp
 )
 
@@ -77,7 +75,6 @@ add_dependencies(
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME} PUBLIC ${catkin_LIBRARIES})
-# target_link_libraries(cpp_controller_node ${PROJECT_NAME})
 target_link_libraries(cpp_controller_server ${PROJECT_NAME})
 
 #############
@@ -95,7 +92,7 @@ target_link_libraries(cpp_controller_server ${PROJECT_NAME})
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS cpp_controller cpp_controller_node
+# install(TARGETS cpp_controller cpp_controller_server
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
