@@ -68,11 +68,11 @@ cd ~/catkin_ws/src
 git clone https://github.com/spmaniato/cs2024_ros_cpp_project.git
 ```
 
-Almost there. Now compile the code and source the workspace:
+Almost there. Now source the workspace and compile the code:
 ```bash
 cd ..
-catkin_make
 source devel/setup.bash
+catkin_make
 ```
 
 Double-check that your catkin workspace is in the ROS package path:
