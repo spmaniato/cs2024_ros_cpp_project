@@ -31,11 +31,12 @@ The figure below, which is linked from http://wiki.ros.org/actionlib, illustrate
 ![img](http://wiki.ros.org/actionlib?action=AttachFile&do=get&target=client_server_interaction.png)
 
 ### Maintainers:
-- Spyros Maniatopoulos ([@spmaniato](https://github.com/spmaniato), sm2296@cornell.edu)
+
+Spyros Maniatopoulos ([@spmaniato](https://github.com/spmaniato), sm2296@cornell.edu)
 
 ### License
 
-[BSD-3](http://opensource.org/licenses/BSD-3-Clause)
+[BSD-3](http://opensource.org/licenses/BSD-3-Clause) (see [`LICENSE`](https://github.com/spmaniato/cs2024_ros_cpp_project/blob/master/LICENSE) file)
 
 ## How-to
 
@@ -79,15 +80,21 @@ Double-check that your catkin workspace is in the ROS package path:
 echo $ROS_PACKAGE_PATH
 ```
 
-
 ### Running TurtleSim, the Server, and the Client
 
-To launch the **master** node, the TurtleSim simulation, and the server
-run the following commands in three separate terminals:
+To launch the **master** node, the TurtleSim simulation node, 
+and our server run the following commands in three separate terminals:
 ```bash
 roscore
 rosrun turtlesim turtlesim_node
 rosrun cpp_controller cpp_controller_server
+```
+
+**Aside**: You must have sourced your new workspace in all the terminals 
+that you want to run the server and client in. 
+Repeat the command in the setup instructions or add it your `.bashrc`:
+```bash
+source ~/catkin_ws/devel/setup.bash
 ```
 
 Then, you can send a request to the server by running the client (in a fourth terminal):
