@@ -7,8 +7,8 @@ in [ROS](http://www.ros.org/) using [actionlib](http://wiki.ros.org/actionlib).
 
 ### Table of Contents
 
-* [About](https://github.com/spmaniato/cs2024_ros_cpp_project#about)
-* [How-to](https://github.com/spmaniato/cs2024_ros_cpp_project#how-to)
+* [About the Project](https://github.com/spmaniato/cs2024_ros_cpp_project#about)
+* [How-to Guide](https://github.com/spmaniato/cs2024_ros_cpp_project#how-to-guide)
 * [Under the Hood](https://github.com/spmaniato/cs2024_ros_cpp_project#under-the-hood)
 
 ## About
@@ -38,7 +38,7 @@ Spyros Maniatopoulos ([@spmaniato](https://github.com/spmaniato), sm2296@cornell
 
 [BSD-3](http://opensource.org/licenses/BSD-3-Clause) (see [`LICENSE`](https://github.com/spmaniato/cs2024_ros_cpp_project/blob/master/LICENSE) file)
 
-## How-to
+## How-to Guide
 
 ### ROS Installation
 
