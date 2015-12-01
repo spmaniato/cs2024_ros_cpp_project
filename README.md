@@ -59,20 +59,20 @@ In a nutshell:
 ```bash
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-catkin_init_workspace
+catkin_init_workspace # Make sure you are in the src directory
 ```
 
 Then, navigate to the `src` directory and clone this project:
 ```bash
-cd ~/catkin_ws/src
+cd ~/catkin_ws/src # Make sure you are in the src directory
 git clone https://github.com/spmaniato/cs2024_ros_cpp_project.git
 ```
 
 Almost there. Now source the workspace and compile the code:
 ```bash
-cd ..
+cd .. # Takes you back to the catkin_ws directory
 source devel/setup.bash
-catkin_make
+catkin_make # You may have to run this twice
 ```
 
 Double-check that your catkin workspace is in the ROS package path:
@@ -94,7 +94,7 @@ rosrun cpp_controller cpp_controller_server
 that you want to run the server and client in. 
 Repeat the command in the setup instructions or add it your `.bashrc`:
 ```bash
-source ~/catkin_ws/devel/setup.bash
+source ~/catkin_ws/devel/setup.bash # Assuming you created catkin_ws under ~
 ```
 
 Then, you can send a request to the server by running the client (in a fourth terminal):
