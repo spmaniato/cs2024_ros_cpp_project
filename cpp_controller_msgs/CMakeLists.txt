@@ -10,7 +10,7 @@ set(MSG_DEPS
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED genmsg ${MSG_DEPS})
+find_package(catkin REQUIRED COMPONENTS roscpp rospy message_generation genmsg actionlib ${MSG_DEPS})
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -79,10 +79,10 @@ generate_messages(DEPENDENCIES ${MSG_DEPS})
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES cpp_controller_msgs
-#  CATKIN_DEPENDS roscpp rospy std_msgs
-  DEPENDS system_lib ${MSG_DEPS}
+  # INCLUDE_DIRS include
+  # LIBRARIES cpp_controller_msgs
+  CATKIN_DEPENDS roscpp rospy message_runtime actionlib ${MSG_DEPS}
+  # DEPENDS system_lib
 )
 
 ###########
@@ -91,10 +91,7 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
+# include_directories(include ${catkin_INCLUDE_DIRS})
 
 ## Declare a cpp library
 # add_library(cpp_controller_msgs
@@ -128,7 +125,7 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS cpp_controller_msgs cpp_controller_msgs_node
+# install(TARGETS ${PROJECT_NAME}
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -147,6 +144,11 @@ include_directories(
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
+
+install(DIRECTORY action
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  FILES_MATCHING PATTERN "*.action"
+)
 
 #############
 ## Testing ##

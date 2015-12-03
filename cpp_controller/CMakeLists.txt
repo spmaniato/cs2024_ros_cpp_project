@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib_msgs
   geometry_msgs
   turtlesim
+  # cpp_controller_msgs
 )
 
 find_package(Boost REQUIRED COMPONENTS system)
@@ -67,14 +68,10 @@ add_executable(
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-add_dependencies(
-  ${PROJECT_NAME}
-  cpp_controller_generate_messages_cpp
-  # cpp_controller_server
-)
+add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME} PUBLIC ${catkin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${catkin_LIBRARIES} ${boost_LIBRARIES})
 target_link_libraries(cpp_controller_server ${PROJECT_NAME})
 
 #############
