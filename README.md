@@ -3,7 +3,7 @@
 Lightweight waypoint following for the [TurtleSim](http://wiki.ros.org/turtlesim) 
 in [ROS](http://www.ros.org/) using [actionlib](http://wiki.ros.org/actionlib).
 
-![img](https://dl.dropboxusercontent.com/u/43993203/waypoint_following.png)
+![img](https://dl.dropboxusercontent.com/u/43993203/img/waypoint_following.png)
 
 ### Table of Contents
 
