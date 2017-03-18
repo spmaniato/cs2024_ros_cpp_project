@@ -3,7 +3,7 @@
 Lightweight waypoint following for the [TurtleSim](http://wiki.ros.org/turtlesim) 
 in [ROS](http://www.ros.org/) using [actionlib](http://wiki.ros.org/actionlib).
 
-![img](https://dl.dropboxusercontent.com/u/43993203/img/waypoint_following.png)
+![img](https://dl.dropboxusercontent.com/s/v1jjiobh17olage/waypoint_following.png)
 
 ### Table of Contents
 
@@ -131,7 +131,7 @@ Given a waypoint `[x_d y_d]`, the action server determines the robot's linear, `
 and angular, `ω`, velocities using the feedback linearization scheme below, 
 where `ε` (epsilon) is a small positive constant parameter.
 
-![img](https://dl.dropboxusercontent.com/u/43993203/feedback_linearization.png)
+![img](https://dl.dropboxusercontent.com/s/zd47k22jnah3l7f/feedback_linearization.png)
 
 and `[x y θ]` is the pose (position and orientation) of the robot at any given time. 
 
